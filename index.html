@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ильгиза Темергалина — Художник</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Golos+Text:wght@400..900&display=swap" rel="stylesheet">
+    
+    <!-- Иконочный шрифт -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --bg-main: #F8F6F0;
+            --bg-secondary: #EFEBE1;
+            --text-main: #2D2723;
+            --text-muted: #6B635E;
+            --accent: #8A745A;
+            --accent-hover: #6A5640;
+            --white: #FFFFFF;
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Golos Text', sans-serif;
+            --transition-smooth: all 0.3s ease;
+            --border-radius: 4px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section { padding: 80px 0; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: var(--border-radius);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-primary { background-color: var(--accent); color: var(--white); }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        .btn-outline { background-color: transparent; color: var(--text-main); border: 1px solid var(--accent); }
+        .btn-outline:hover { background-color: var(--accent); color: var(--white); }
+
+        /* Галерея (Flex) */
+        .art-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+
+        .art-item {
+            flex: 1 1 calc(33.333% - 32px);
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+            padding: 16px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            max-width: 400px;
+        }
+
+        .art-item img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+        }
+
+        .art-item h3 {
+            margin-top: 16px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: none;
+        }
+
+        .art-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        @keyframes zoom-out {
+            from { transform: scale(1.05); }
+            to { transform: scale(1); }
+        }
+        .hero-bg { animation: zoom-out 15s infinite alternate ease-in-out; }
+
+        @media (max-width: 1024px) {
+            .art-item { flex: 1 1 calc(50% - 32px); }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav, .header-contact-info { display: none; }
+            .art-item { flex: 1 1 100%; max-width: 100%; }
+            .hero-title { font-size: 2.5rem; }
+            .section { padding: 48px 0; }
+            .final-cta-flex { flex-direction: column !important; text-align: center; }
+            .final-cta-flex .flex-col { align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="w-full bg-[#F8F6F0] border-b border-[#EFEBE1] py-6 sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm">
+        <div class="container flex items-center justify-between">
+            <div class="flex flex-col">
+                <a href="#" class="text-2xl tracking-widest font-semibold" style="font-family: var(--font-heading);">ИЛЬГИЗА<br>ТЕМЕРГАЛИНА</a>
+            </div>
+            <nav class="header-nav flex items-center gap-8 text-sm uppercase tracking-wider text-[#6B635E]">
+                <a href="#about" class="hover:text-[#2D2723] transition">О художнике</a>
+                <a href="#services" class="hover:text-[#2D2723] transition">Услуги</a>
+                <a href="#gallery" class="hover:text-[#2D2723] transition">Галерея</a>
+                <a href="#reviews" class="hover:text-[#2D2723] transition">Отзывы</a>
+            </nav>
+            <div class="flex items-center gap-6">
+                <div class="header-contact-info flex flex-col items-end text-sm">
+                    <a href="tel:+79999990000" class="font-semibold hover:text-[#8A745A] transition">+7 999 999 00 00</a>
+                    <div class="flex gap-3 mt-1">
+                        <!-- Иконки PNG -->
+                        <a href="https://vk.ru/izazazii" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                            <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
+                        </a>
+                        <a href="#" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                            <img src="img/tg-logo.png" alt="Telegram" class="w-full h-full object-contain absolute inset-0">
+                        </a>
+                        <a href="#" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                            <img src="img/wa-logo.png" alt="WhatsApp" class="w-full h-full object-contain absolute inset-0">
+                        </a>
+                        <a href="#" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                            <img src="img/Inst-logo.png" alt="Instagram" class="w-full h-full object-contain absolute inset-0">
+                        </a>
+                    </div>
+                </div>
+                <a href="#final-cta" class="btn btn-primary hidden md:inline-flex">Связаться</a>
+                <a href="#final-cta" class="btn btn-primary md:hidden px-4 py-2 text-xs">Связаться</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
+    <section class="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="img/hero.jpg" alt="Ильгиза" class="hero-bg w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+        <div class="container relative z-10 flex flex-col items-center text-center text-white">
+            <h1 class="hero-title text-5xl md:text-7xl mb-6 font-normal" style="font-family: var(--font-heading);">ИСКУССТВО,<br>КОТОРОЕ ГОВОРИТ</h1>
+            <p class="text-lg md:text-xl max-w-2xl mb-10 text-gray-200">Каждая картина — мои эмоции, взгляд и энергия. Пишу, потому что люблю, и хочу, чтобы работа нашла своего человека в вашем доме.</p>
+            <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto px-4 md:px-0">
+                <a href="#gallery" class="btn btn-primary w-full md:w-auto">Смотреть работы</a>
+                <a href="#final-cta" class="btn btn-outline bg-white/10 border-white text-white hover:bg-white hover:text-black w-full md:w-auto">Заказать картину</a>
+            </div>
+            <!-- Иконки на мобильных -->
+            <div class="flex gap-4 mt-8 md:hidden">
+                <a href="https://vk.ru/izazazii" target="_blank" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/vk-logo.png" alt="VK" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                </a>
+                <a href="#" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/tg-logo.png" alt="TG" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                </a>
+                <a href="#" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/wa-logo.png" alt="WA" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                </a>
+                <a href="#" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/Inst-logo.png" alt="Instagram" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРОБЛЕМА -->
+    <section class="section bg-[#EFEBE1]">
+        <div class="container flex flex-col md:flex-row gap-16 items-center">
+            <div class="flex-1">
+                <h2 class="text-3xl md:text-4xl mb-6 text-[#8A745A]">ВАШ ДОМ ЗАСЛУЖИВАЕТ<br>ОСОБЕННОГО АКЦЕНТА</h2>
+                <p class="text-lg text-[#6B635E] mb-4">Знакомая ситуация, когда интерьер выглядит стильно, но в нём не хватает души? Стандартные постеры и репродукции не передают тепла. В доме не хватает истории, которая будет согревать каждый день.</p>
+                <p class="text-lg text-[#6B635E]">Я создаю картины, которые становятся сердцем пространства. От камерных натюрмортов до масштабных полотен — каждая моя работа имеет фактуру, свет и энергию, которые невозможно скопировать.</p>
+            </div>
+            <div class="flex-1 flex flex-col gap-4">
+                <div class="p-6 bg-white rounded-lg shadow-sm border border-[#EFEBE1]">
+                    <h3 class="text-xl mb-2 font-semibold">Нет уникальной атмосферы</h3>
+                    <p class="text-sm text-[#6B635E]">Готовые решения не отражают вашу индивидуальность и не вызывают эмоций.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-sm border border-[#EFEBE1]">
+                    <h3 class="text-xl mb-2 font-semibold">Страх «пустых» вложений</h3>
+                    <p class="text-sm text-[#6B635E]">Купить картину вслепую — значит рисковать, что она не впишется в интерьер или не понравится.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О ХУДОЖНИКЕ -->
+    <section id="about" class="section">
+        <div class="container flex flex-col md:flex-row gap-12 items-center">
+            <div class="flex-1 w-full">
+                <img src="img/artist-photo.jpg" alt="Ильгиза Темергалина" class="w-full h-auto rounded-lg shadow-lg object-cover aspect-[3/4] max-h-[600px]">
+            </div>
+            <div class="flex-1">
+                <h2 class="text-3xl md:text-5xl mb-6 text-[#2D2723]">МЕНЯ ЗОВУТ<br>ИЛЬГИЗА</h2>
+                <p class="text-lg text-[#6B635E] mb-4">Я пишу, потому что люблю — это моё удовольствие. В каждой картине мои эмоции, взгляд и энергия. Мне по-настоящему радостно, когда работа находит своего человека: это самый тёплый отклик.</p>
+                <p class="text-lg text-[#6B635E] mb-4">Мои «частички» уже поселились в коллекциях России, Китая, Индии, Казахстана, Киргизии, Беларуси, США и Европы. Я создаю работы акрилом, маслом, графикой и текстурной пастой.</p>
+                <p class="text-lg text-[#6B635E] mb-8">Я преподаю живопись, но главное моё призвание — создавать искусство для вас. Давайте найдём ту самую работу, которая будет согревать именно ваш дом.</p>
+                <a href="#final-cta" class="btn btn-primary">Обсудить заказ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- УСЛУГИ -->
+    <section id="services" class="section bg-[#EFEBE1]">
+        <div class="container text-center mb-12">
+            <h2 class="text-3xl md:text-5xl mb-4">УСЛУГИ</h2>
+            <p class="text-lg text-[#6B635E] max-w-2xl mx-auto">Создаю картины, которые становятся инвестицией в красоту и уют вашего дома.</p>
+        </div>
+        <div class="container flex flex-col md:flex-row gap-8">
+            <div class="flex-1 bg-white p-8 rounded-lg shadow-sm">
+                <h3 class="text-2xl mb-4 font-semibold">Картина на заказ</h3>
+                <p class="text-[#6B635E] mb-4">Индивидуальная работа под ваш интерьер. Обсуждаем стиль, цвета, размер и настроение. Вы получаете уникальное произведение, которое идеально впишется в пространство.</p>
+                <a href="#final-cta" class="text-[#8A745A] font-semibold hover:underline">Узнать подробнее <i class="ri-arrow-right-line"></i></a>
+            </div>
+            <div class="flex-1 bg-white p-8 rounded-lg shadow-sm">
+                <h3 class="text-2xl mb-4 font-semibold">Готовые работы</h3>
+                <p class="text-[#6B635E] mb-4">Вы можете выбрать уже готовую картину из моей коллекции. Каждая из них написана с любовью и готова поселиться в вашем доме.</p>
+                <a href="#gallery" class="text-[#8A745A] font-semibold hover:underline">Смотреть галерею <i class="ri-arrow-right-line"></i></a>
+            </div>
+            <div class="flex-1 bg-white p-8 rounded-lg shadow-sm">
+                <h3 class="text-2xl mb-4 font-semibold">Уроки живописи</h3>
+                <p class="text-[#6B635E] mb-4">Передаю опыт и помогаю раскрыть творческий потенциал. Индивидуальные занятия и мастер-классы для всех уровней.</p>
+                <a href="#final-cta" class="text-[#8A745A] font-semibold hover:underline">Записаться <i class="ri-arrow-right-line"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <section class="section">
+        <div class="container text-center mb-12">
+            <h2 class="text-3xl md:text-5xl mb-4">ПОЧЕМУ МОИ РАБОТЫ ВЫБИРАЮТ</h2>
+        </div>
+        <div class="container flex flex-col md:flex-row gap-8 text-center">
+            <div class="flex-1 p-4">
+                <i class="ri-brush-line text-4xl text-[#8A745A] mb-4 block"></i>
+                <h3 class="text-xl mb-2 font-semibold">Ручная работа</h3>
+                <p class="text-[#6B635E]">Каждая картина написана вручную, без использования принтов и шаблонов.</p>
+            </div>
+            <div class="flex-1 p-4">
+                <i class="ri-global-line text-4xl text-[#8A745A] mb-4 block"></i>
+                <h3 class="text-xl mb-2 font-semibold">Международный опыт</h3>
+                <p class="text-[#6B635E]">Мои работы находятся в частных коллекциях России, Китая, Индии, Казахстана, США и Европы.</p>
+            </div>
+            <div class="flex-1 p-4">
+                <i class="ri-emotion-happy-line text-4xl text-[#8A745A] mb-4 block"></i>
+                <h3 class="text-xl mb-2 font-semibold">Индивидуальный подход</h3>
+                <p class="text-[#6B635E]">Слушаю ваши пожелания и создаю работу, которая отражает вашу индивидуальность.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section id="reviews" class="section bg-[#EFEBE1]">
+        <div class="container text-center mb-12">
+            <h2 class="text-3xl md:text-5xl mb-4">ОТЗЫВЫ</h2>
+            <p class="text-lg text-[#6B635E]">Тёплые слова, которые вдохновляют меня продолжать творить.</p>
+        </div>
+        <div class="container flex flex-col md:flex-row flex-wrap gap-6">
+            <div class="flex-1 min-w-[280px] bg-white p-8 rounded-lg shadow-sm flex flex-col justify-between">
+                <p class="text-[#6B635E] italic mb-6">"Ильгиза, спасибо за вашу работу! Картина стала центром гостиной, все гости спрашивают, кто автор. Очень тёплая и живая."</p>
+                <div>
+                    <p class="font-semibold">Анна К.</p>
+                    <p class="text-sm text-gray-400">Москва</p>
+                </div>
+            </div>
+            <div class="flex-1 min-w-[280px] bg-white p-8 rounded-lg shadow-sm flex flex-col justify-between">
+                <p class="text-[#6B635E] italic mb-6">"Заказывали картину в подарок на юбилей. Получилось невероятно красиво и атмосферно! Очень довольны результатом."</p>
+                <div>
+                    <p class="font-semibold">Дмитрий и Ольга</p>
+                    <p class="text-sm text-gray-400">Санкт-Петербург</p>
+                </div>
+            </div>
+            <div class="flex-1 min-w-[280px] bg-white p-8 rounded-lg shadow-sm flex flex-col justify-between">
+                <p class="text-[#6B635E] italic mb-6">"Удивительное чувство цвета и фактуры. Картина смотрится очень дорого и стильно. Спасибо за ваш талант!"</p>
+                <div>
+                    <p class="font-semibold">Екатерина</p>
+                    <p class="text-sm text-gray-400">Казань</p>
+                </div>
+            </div>
+            <div class="flex-1 min-w-[280px] bg-white p-8 rounded-lg shadow-sm flex flex-col justify-between">
+                <p class="text-[#6B635E] italic mb-6">"Очень понравился процесс обсуждения. Ильгиза учла все наши пожелания по цветам, и картина идеально вписалась в интерьер."</p>
+                <div>
+                    <p class="font-semibold">Мария С.</p>
+                    <p class="text-sm text-gray-400">Екатеринбург</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ГАЛЕРЕЯ -->
+    <section id="gallery" class="section">
+        <div class="container text-center mb-12">
+            <h2 class="text-3xl md:text-5xl mb-4">ГАЛЕРЕЯ</h2>
+            <p class="text-lg text-[#6B635E]">Некоторые из моих работ, которые уже нашли свой дом.</p>
+        </div>
+        <div class="container art-grid">
+            <!-- Работа 1 -->
+            <div class="art-item">
+                <img src="img/art-1.jpg" alt="Дождь в саду">
+                <h3>«Дождь в саду»</h3>
+                <p>Насыщенные краски спелых яблок и влажный блеск листьев на фоне грозового неба. Эмоциональная живопись маслом, передающая аромат летнего дождя.<br><span class="font-semibold mt-2 block">Масло на холсте. 2026 г.</span></p>
+            </div>
+            <!-- Работа 2 -->
+            <div class="art-item">
+                <img src="img/art-2.jpg" alt="Доверие">
+                <h3>«Доверие»</h3>
+                <p>Акварельная работа, наполненная нежностью и теплом. Девочка с кудрявыми волосами обнимает голову лошади, создавая образ искренней дружбы.<br><span class="font-semibold mt-2 block">Акварель на бумаге. 2026 г.</span></p>
+            </div>
+            <!-- Работа 3 -->
+            <div class="art-item">
+                <img src="img/art-3.jpg" alt="Танец в сиреневых сумерках">
+                <h3>«Танец в сиреневых сумерках»</h3>
+                <p>Эмоциональная живопись, написанная энергичными мазками. Две лошади среди цветущего луга под переливами закатного неба.<br><span class="font-semibold mt-2 block">Масло на холсте. 2026 г.</span></p>
+            </div>
+            <!-- Работа 4 -->
+            <div class="art-item">
+                <img src="img/art-4.jpg" alt="Пленительный силуэт">
+                <h3>«Пленительный силуэт»</h3>
+                <p>Эмоциональная живопись в стиле ню, выполненная смелыми мазками. Изящный образ женщины на фоне абстрактного синего полотна с брызгами краски.<br><span class="font-semibold mt-2 block">Акрил на холсте. 2024 г.</span></p>
+            </div>
+        </div>
+        <!-- Кнопка "Купить" после галереи -->
+        <div class="container text-center mt-16">
+            <a href="#final-cta" class="btn btn-primary text-lg px-12 py-5">Купить картину</a>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section bg-[#EFEBE1]">
+        <div class="container text-center mb-12">
+            <h2 class="text-3xl md:text-5xl mb-4">ЧАСТЫЕ ВОПРОСЫ</h2>
+        </div>
+        <div class="container flex flex-col gap-4 max-w-3xl mx-auto">
+            <details class="bg-white p-6 rounded-lg shadow-sm group">
+                <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                    <span>Как заказать картину?</span>
+                    <i class="ri-arrow-down-s-line group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-4 text-[#6B635E]">
+                    <p class="mb-4">Всё просто! Напишите мне в удобный мессенджер или позвоните. Мы обсудим ваши пожелания, размер, стиль и сроки. После согласования деталей я приступлю к работе.</p>
+                    <a href="#final-cta" class="btn btn-primary text-sm px-4 py-2">Написать мне</a>
+                </div>
+            </details>
+            <details class="bg-white p-6 rounded-lg shadow-sm group">
+                <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                    <span>Сколько времени занимает создание картины?</span>
+                    <i class="ri-arrow-down-s-line group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-4 text-[#6B635E]">
+                    <p class="mb-4">В зависимости от сложности и размера, работа может занять от 2 до 6 недель. Точные сроки мы обсудим на этапе заказа.</p>
+                    <a href="#final-cta" class="btn btn-primary text-sm px-4 py-2">Узнать сроки</a>
+                </div>
+            </details>
+            <details class="bg-white p-6 rounded-lg shadow-sm group">
+                <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                    <span>Возможна ли доставка в другой город?</span>
+                    <i class="ri-arrow-down-s-line group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-4 text-[#6B635E]">
+                    <p class="mb-4">Да, я отправляю картины по всей России и за границу. Упаковываю максимально надёжно, чтобы работа дошла в целости.</p>
+                    <a href="#final-cta" class="btn btn-primary text-sm px-4 py-2">Обсудить доставку</a>
+                </div>
+            </details>
+            <details class="bg-white p-6 rounded-lg shadow-sm group">
+                <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                    <span>Можно ли посмотреть картину вживую?</span>
+                    <i class="ri-arrow-down-s-line group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-4 text-[#6B635E]">
+                    <p class="mb-4">На данный момент у меня нет физической галереи, но я могу отправить дополнительные фото и видео работы, чтобы вы могли рассмотреть все детали.</p>
+                    <a href="#final-cta" class="btn btn-primary text-sm px-4 py-2">Запросить фото</a>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ФИНАЛЬНАЯ CTA -->
+    <section id="final-cta" class="relative w-full py-24 flex items-center">
+        <div class="absolute inset-0 z-0">
+            <img src="img/artist-photo2.jpg" alt="Фон" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/60"></div>
+        </div>
+        
+        <div class="container relative z-10 flex flex-col md:flex-row justify-between items-center text-white gap-12 final-cta-flex">
+            <div class="flex-1 flex flex-col items-start md:items-start text-center md:text-left">
+                <h2 class="text-4xl md:text-6xl mb-6">ДАВАЙТЕ НАЙДЁМ<br>ТУ САМУЮ РАБОТУ</h2>
+                <p class="text-lg text-gray-200 mb-8 max-w-lg">Напишите мне, чтобы обсудить детали, задать вопросы или просто поговорить об искусстве. Я всегда рада новым знакомствам и интересным проектам.</p>
+                
+                <div class="flex flex-col gap-2 mb-8 items-center md:items-start">
+                    <span class="text-sm uppercase tracking-widest text-gray-400">Телефон</span>
+                    <a href="tel:+79999990000" class="text-2xl font-semibold hover:text-[#8A745A] transition">+7 999 999 00 00</a>
+                </div>
+            </div>
+            
+            <div class="flex-1 flex flex-col items-center md:items-end gap-6 w-full">
+                <p class="text-sm uppercase tracking-widest text-gray-400 mb-2">Или напишите мне</p>
+                <div class="flex gap-4">
+                    <!-- Иконки БЕЗ подложки, просто крупные картинки -->
+                    <a href="https://vk.ru/izazazii" target="_blank" class="block hover:opacity-80 transition">
+                        <img src="img/vk-logo.png" alt="VK" class="w-8 h-8 object-contain">
+                    </a>
+                    <a href="#" target="_blank" class="block hover:opacity-80 transition">
+                        <img src="img/tg-logo.png" alt="Telegram" class="w-8 h-8 object-contain">
+                    </a>
+                    <a href="#" target="_blank" class="block hover:opacity-80 transition">
+                        <img src="img/wa-logo.png" alt="WhatsApp" class="w-8 h-8 object-contain">
+                    </a>
+                    <a href="#" target="_blank" class="block hover:opacity-80 transition">
+                        <img src="img/Inst-logo.png" alt="Instagram" class="w-8 h-8 object-contain">
+                    </a>
+                </div>
+                <a href="https://vk.ru/izazazii" target="_blank" class="btn btn-primary mt-4 w-full md:w-auto">Написать ВКонтакте</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
