@@ -31,7 +31,7 @@
             --border-radius: 4px;
         }
 
-        /* ЖЕСТКАЯ ЗАЩИТА ОТ ГОРИЗОНТАЛЬНОГО СКРОЛЛА */
+        /* ЗАЩИТА ОТ ГОРИЗОНТАЛЬНОГО СКРОЛЛА */
         html, body {
             width: 100%;
             max-width: 100vw;
@@ -93,44 +93,135 @@
         .btn-outline { background-color: transparent; color: var(--text-main); border: 1px solid var(--accent); }
         .btn-outline:hover { background-color: var(--accent); color: var(--white); }
 
-        /* Галерея (Flex) */
-        .art-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 32px;
-            justify-content: center;
+        /* --- НОВАЯ ГАЛЕРЕЯ-КАРУСЕЛЬ --- */
+        .gallery-wrapper {
+            position: relative;
+            margin-top: 40px;
         }
 
-        .art-item {
-            flex: 1 1 calc(33.333% - 32px);
+        .gallery-scroll {
             display: flex;
-            flex-direction: column;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 24px; /* Место под скроллбар */
+            cursor: grab;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-secondary);
+        }
+
+        .gallery-scroll:active {
+            cursor: grabbing;
+        }
+
+        /* Стилизация скроллбара для Webkit (Chrome, Safari) */
+        .gallery-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .gallery-scroll::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .art-card {
+            flex: 0 0 85vw; /* На мобильных карточка почти на весь экран */
+            max-width: 400px;
+            scroll-snap-align: start;
             background: var(--white);
             padding: 16px;
             border-radius: var(--border-radius);
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            user-select: none; /* Запрет выделения текста при перетаскивании */
         }
 
-        .art-item img {
+        @media (min-width: 768px) {
+            .art-card { flex: 0 0 calc(33.333% - 16px); } /* На десктопе по 3 карточки */
+        }
+
+        .art-image-container {
+            position: relative;
             width: 100%;
-            height: auto;
             aspect-ratio: 4 / 5;
-            object-fit: cover;
             border-radius: var(--border-radius);
+            overflow: hidden;
+            background: var(--bg-secondary);
+            margin-bottom: 16px;
         }
 
-        .art-item h3 {
-            margin-top: 16px;
+        .art-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none; /* Отключаем перетаскивание картинки */
+        }
+
+        .art-card h3 {
             font-size: 1.5rem;
             font-weight: 600;
             text-transform: none;
+            margin-bottom: 8px;
         }
 
-        .art-item p {
+        .art-card p {
             font-size: 14px;
             color: var(--text-muted);
+        }
+
+        .art-card .tech {
+            font-weight: 600;
             margin-top: 8px;
+            display: block;
+            color: var(--text-main);
+        }
+
+        /* Стрелка "Листай" */
+        .swipe-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: absolute;
+            right: 0;
+            top: -40px;
+            animation: floatRight 2s infinite ease-in-out;
+        }
+
+        @keyframes floatRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* Переключатель годов для 12-й картины */
+        .year-switcher {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .year-btn {
+            font-size: 12px;
+            padding: 4px 12px;
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+        }
+        .year-btn.active {
+            background: var(--accent);
+            color: var(--white);
         }
 
         @keyframes zoom-out {
@@ -139,26 +230,29 @@
         }
         .hero-bg { animation: zoom-out 15s infinite alternate ease-in-out; }
 
-        /* ПЛАНШЕТЫ */
+        /* МОБИЛЬНОЕ МЕНЮ */
+        #mobile-menu {
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.active {
+            max-height: 600px;
+            opacity: 1;
+            overflow-y: auto;
+        }
+
         @media (max-width: 1024px) {
-            .art-item { flex: 1 1 calc(50% - 32px); }
             .hero-title { font-size: 4rem; }
         }
 
-        /* МОБИЛЬНЫЕ */
         @media (max-width: 768px) {
-            .header-nav, .header-contact-info { 
-                display: none !important; 
-            }
-            .art-item { flex: 1 1 100%; max-width: 100%; }
+            .desktop-nav, .desktop-contacts { display: none !important; }
             .hero-title { font-size: 2.5rem; }
             .section { padding: 48px 0; }
-            
-            /* Исправление финальной секции */
             .final-cta-flex { flex-direction: column !important; text-align: center; }
             .final-cta-flex .flex-col { align-items: center; }
-            
-            /* Фикс заголовков, чтобы не вылезали */
             h1, h2, h3 { word-wrap: break-word; }
         }
     </style>
@@ -168,17 +262,21 @@
     <!-- ШАПКА -->
     <header class="w-full bg-[#F8F6F0] border-b border-[#EFEBE1] py-4 md:py-6 sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm">
         <div class="container flex items-center justify-between">
-            <div class="flex flex-col">
+            <div class="flex flex-col z-50">
                 <a href="#" class="text-xl md:text-2xl tracking-widest font-semibold" style="font-family: var(--font-heading);">ИЛЬГИЗА<br>ТЕМЕРГАЛИНА</a>
             </div>
-            <nav class="header-nav flex items-center gap-8 text-sm uppercase tracking-wider text-[#6B635E]">
+            
+            <!-- Навигация (Десктоп) -->
+            <nav class="desktop-nav hidden md:flex items-center gap-8 text-sm uppercase tracking-wider text-[#6B635E]">
                 <a href="#about" class="hover:text-[#2D2723] transition">О художнике</a>
                 <a href="#services" class="hover:text-[#2D2723] transition">Услуги</a>
                 <a href="#gallery" class="hover:text-[#2D2723] transition">Галерея</a>
                 <a href="#reviews" class="hover:text-[#2D2723] transition">Отзывы</a>
             </nav>
-            <div class="flex items-center gap-4 md:gap-6">
-                <div class="header-contact-info flex flex-col items-end text-sm">
+
+            <!-- Контакты и CTA (Десктоп) -->
+            <div class="hidden md:flex items-center gap-6">
+                <div class="desktop-contacts flex flex-col items-end text-sm">
                     <a href="tel:+79999990000" class="font-semibold hover:text-[#8A745A] transition">+7 999 999 00 00</a>
                     <div class="flex gap-3 mt-1 items-center">
                         <a href="https://vk.ru/izazazii" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
@@ -195,8 +293,43 @@
                         </a>
                     </div>
                 </div>
-                <a href="#final-cta" class="btn btn-primary hidden md:inline-flex">Связаться</a>
-                <a href="#final-cta" class="btn btn-primary md:hidden px-4 py-2 text-xs">Связаться</a>
+                <a href="#final-cta" class="btn btn-primary">Связаться</a>
+            </div>
+
+            <!-- Кнопка Гамбургер (Мобильная) -->
+            <button id="menu-btn" class="md:hidden z-50 p-2 text-[#2D2723] focus:outline-none">
+                <i class="ri-menu-3-line text-3xl" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Выпадающее мобильное меню -->
+        <div id="mobile-menu" class="md:hidden bg-[#F8F6F0] border-t border-[#EFEBE1] absolute w-full left-0 shadow-lg">
+            <div class="flex flex-col px-6 py-6 gap-6 text-lg text-[#6B635E]">
+                <a href="#about" class="hover:text-[#8A745A] transition mobile-link">О художнике</a>
+                <a href="#services" class="hover:text-[#8A745A] transition mobile-link">Услуги</a>
+                <a href="#gallery" class="hover:text-[#8A745A] transition mobile-link">Галерея</a>
+                <a href="#reviews" class="hover:text-[#8A745A] transition mobile-link">Отзывы</a>
+                
+                <hr class="border-[#EFEBE1] my-2">
+                
+                <a href="tel:+79999990000" class="font-semibold text-[#2D2723] text-xl">+7 999 999 00 00</a>
+                
+                <div class="flex gap-4 mt-2 items-center">
+                    <a href="https://vk.ru/izazazii" target="_blank" class="w-8 h-8 block relative">
+                        <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
+                    </a>
+                    <a href="#" target="_blank" class="w-8 h-8 block relative">
+                        <img src="img/tg-logo.png" alt="Telegram" class="w-full h-full object-contain absolute inset-0">
+                    </a>
+                    <a href="#" target="_blank" class="w-10 h-10 block relative">
+                        <img src="img/wa-logo.png" alt="WhatsApp" class="w-full h-full object-contain absolute inset-0">
+                    </a>
+                    <a href="#" target="_blank" class="w-8 h-8 block relative">
+                        <img src="img/Inst-logo.png" alt="Instagram" class="w-full h-full object-contain absolute inset-0">
+                    </a>
+                </div>
+                
+                <a href="#final-cta" class="btn btn-primary w-full mt-2 mobile-link">Связаться</a>
             </div>
         </div>
     </header>
@@ -214,8 +347,8 @@
                 <a href="#gallery" class="btn btn-primary w-full md:w-auto">Смотреть работы</a>
                 <a href="#final-cta" class="btn btn-outline bg-white/10 border-white text-white hover:bg-white hover:text-black w-full md:w-auto">Заказать картину</a>
             </div>
-            <!-- Иконки на мобильных -->
-            <div class="flex gap-4 mt-8 md:hidden items-center">
+            <!-- Иконки на мобильных (в hero) -->
+            <div class="flex gap-4 mt-8 md:hidden items-center justify-center">
                 <a href="https://vk.ru/izazazii" target="_blank" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
                     <img src="img/vk-logo.png" alt="VK" class="w-5 h-5 object-contain absolute inset-0 m-auto">
                 </a>
@@ -356,41 +489,460 @@
         </div>
     </section>
 
-    <!-- ГАЛЕРЕЯ -->
-    <section id="gallery" class="section">
-        <div class="container text-center mb-10 md:mb-12">
-            <h2 class="text-3xl md:text-5xl mb-4">ГАЛЕРЕЯ</h2>
-            <p class="text-base md:text-lg text-[#6B635E]">Некоторые из моих работ, которые уже нашли свой дом.</p>
-        </div>
-        <div class="container art-grid">
-            <!-- Работа 1 -->
-            <div class="art-item">
-                <img src="img/art-1.jpg" alt="Дождь в саду">
-                <h3>«Дождь в саду»</h3>
-                <p>Насыщенные краски спелых яблок и влажный блеск листьев на фоне грозового неба. Эмоциональная живопись маслом, передающая аромат летнего дождя.<br><span class="font-semibold mt-2 block">Масло на холсте. 2026 г.</span></p>
+    <!-- =========================================
+         ГАЛЕРЕЯ (НОВАЯ КАРУСЕЛЬ)
+         ========================================= -->
+    <section id="gallery" class="section overflow-hidden">
+        <div class="container relative">
+            <div class="text-center mb-10 md:mb-12">
+                <h2 class="text-3xl md:text-5xl mb-4">ГАЛЕРЕЯ</h2>
+                <p class="text-base md:text-lg text-[#6B635E]">Некоторые из моих работ, которые уже нашли свой дом.</p>
             </div>
-            <!-- Работа 2 -->
-            <div class="art-item">
-                <img src="img/art-2.jpg" alt="Доверие">
-                <h3>«Доверие»</h3>
-                <p>Акварельная работа, наполненная нежностью и теплом. Девочка с кудрявыми волосами обнимает голову лошади, создавая образ искренней дружбы.<br><span class="font-semibold mt-2 block">Акварель на бумаге. 2026 г.</span></p>
+
+            <!-- Стрелка Листай -->
+            <div class="swipe-hint hidden md:flex">
+                Листай <i class="ri-arrow-right-long-line text-2xl"></i>
             </div>
-            <!-- Работа 3 -->
-            <div class="art-item">
-                <img src="img/art-3.jpg" alt="Танец в сиреневых сумерках">
-                <h3>«Танец в сиреневых сумерках»</h3>
-                <p>Эмоциональная живопись, написанная энергичными мазками. Две лошади среди цветущего луга под переливами закатного неба.<br><span class="font-semibold mt-2 block">Масло на холсте. 2026 г.</span></p>
+            <!-- На мобильных стрелка чуть ниже -->
+            <div class="swipe-hint flex md:hidden !top-[-30px] !right-4 text-sm">
+                Листай <i class="ri-arrow-right-long-line text-xl"></i>
             </div>
-            <!-- Работа 4 -->
-            <div class="art-item">
-                <img src="img/art-4.jpg" alt="Пленительный силуэт">
-                <h3>«Пленительный силуэт»</h3>
-                <p>Эмоциональная живопись в стиле ню, выполненная смелыми мазками. Изящный образ женщины на фоне абстрактного синего полотна с брызгами краски.<br><span class="font-semibold mt-2 block">Акрил на холсте. 2024 г.</span></p>
+
+            <!-- Контейнер карусели -->
+            <div class="gallery-scroll" id="galleryScroll">
+                
+                <!-- Карточка 1 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-1.jpg" alt="Дождь в саду">
+                    </div>
+                    <h3>«Дождь в саду»</h3>
+                    <p>Насыщенные краски спелых яблок и влажный блеск листьев на фоне грозового неба. Эмоциональная живопись маслом.</p>
+                    <span class="tech">Масло на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-2.jpg" alt="Доверие">
+                    </div>
+                    <h3>«Доверие»</h3>
+                    <p>Акварельная работа, наполненная нежностью и теплом. Девочка с кудрявыми волосами обнимает голову лошади.</p>
+                    <span class="tech">Акварель на бумаге. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-3.jpg" alt="Танец в сиреневых сумерках">
+                    </div>
+                    <h3>«Танец в сиреневых сумерках»</h3>
+                    <p>Эмоциональная живопись, написанная энергичными мазками. Две лошади среди цветущего луга под переливами закатного неба.</p>
+                    <span class="tech">Масло на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 4 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-4.jpg" alt="Пленительный силуэт">
+                    </div>
+                    <h3>«Пленительный силуэт»</h3>
+                    <p>Эмоциональная живопись в стиле ню, выполненная смелыми мазками. Изящный образ женщины на фоне абстрактного синего полотна.</p>
+                    <span class="tech">Акрил на холсте. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 5 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-5.jpg" alt="Шёпот звёзд">
+                    </div>
+                    <h3>«Шёпот звёзд»</h3>
+                    <p>Завораживающий пейзаж, где заснеженные вершины растворяются в сиянии Млечного Пути. Картина передаёт величие ночного космоса.</p>
+                    <span class="tech">Масло на холсте. 2022 г.</span>
+                </div>
+
+                <!-- Карточка 6 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-6.jpg" alt="Хранитель осени">
+                    </div>
+                    <h3>«Хранитель осени»</h3>
+                    <p>Уютная живопись, где яркий зимородок с бирюзовым оперением отдыхает на фоне золотистой листвы.</p>
+                    <span class="tech">Акрил на холсте. 2021 г.</span>
+                </div>
+
+                <!-- Карточка 7 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-7.jpg" alt="Танец колибри">
+                    </div>
+                    <h3>«Танец колибри»</h3>
+                    <p>Динамичная живопись, запечатлевшая мгновение невесомости. Две крошечные птицы парят над абстрактным фоном.</p>
+                    <span class="tech">Акрил на холсте. 2022 г.</span>
+                </div>
+
+                <!-- Карточка 8 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-8.jpg" alt="Единство">
+                    </div>
+                    <h3>«Единство»</h3>
+                    <p>Мистическая живопись, где девушка с длинными волосами сливается с образом белого коня. Символ гармонии человека и природы.</p>
+                    <span class="tech">Акрил на холсте. 2021 г.</span>
+                </div>
+
+                <!-- Карточка 9 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-9.jpg" alt="Поцелуй сакуры">
+                    </div>
+                    <h3>«Поцелуй сакуры»</h3>
+                    <p>Эмоциональная живопись, где нежность белого скакуна встречается с яркостью цветущей вишни.</p>
+                    <span class="tech">Масло на холсте. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 10 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-10.jpg" alt="Вальс ветра">
+                    </div>
+                    <h3>«Вальс ветра»</h3>
+                    <p>Эмоциональная живопись, передающая грацию и силу. Пышные пряди гривы танцуют в воздухе на фоне размытого луга.</p>
+                    <span class="tech">Акрил на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 11 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-11.jpg" alt="Певец рассвета">
+                    </div>
+                    <h3>«Певец рассвета»</h3>
+                    <p>Нежная картина, передающая трепетный момент. Маленькая птичка в теплых тонах замерла на ветке среди утреннего тумана.</p>
+                    <span class="tech">Акрил на холсте. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 12 (с переключателем) -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <!-- Картинка 2022 -->
+                        <img src="img/art-12.jpg" alt="Фиалковая симфония 2022" id="img-12" style="display: block;">
+                        <!-- Картинка 2016 (скрыта изначально) -->
+                        <img src="img/art-12.1.jpg" alt="Фиалковая симфония 2016" id="img-12-1" style="display: none;">
+                    </div>
+                    <div class="year-switcher">
+                        <button class="year-btn active" onclick="switchYear('img-12', 'img-12-1', this)">2022</button>
+                        <button class="year-btn" onclick="switchYear('img-12-1', 'img-12', this)">2016</button>
+                    </div>
+                    <h3>«Фиалковая симфония»</h3>
+                    <p>Нежная живопись, наполненная ароматом весны. Пышный букет сирени в стеклянной вазе на фоне переливающихся оттенков.</p>
+                    <span class="tech">Акрил на холсте.</span>
+                </div>
+
+                <!-- Карточка 13 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-13.jpg" alt="Цветочный шепот">
+                    </div>
+                    <h3>«Цветочный шепот»</h3>
+                    <p>Эмоциональный портрет в нежных тонах. Девушка с серебристыми волосами окружена яркими бутонами.</p>
+                    <span class="tech">Акрил на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 14 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-14.jpg" alt="Тень у воды">
+                    </div>
+                    <h3>«Тень у воды»</h3>
+                    <p>Эмоциональная живопись, передающая атмосферу спокойного вечера. Ствол дерева и его отражение на глади озера.</p>
+                    <span class="tech">Масло на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 15 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-15.jpg" alt="Лунный след">
+                    </div>
+                    <h3>«Лунный след»</h3>
+                    <p>Монохромная живопись, наполненная магией зимнего леса. Вьюга и лунный свет создают загадочную атмосферу.</p>
+                    <span class="tech">Масло на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 16 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-16.jpg" alt="Весенний вальс">
+                    </div>
+                    <h3>«Весенний вальс»</h3>
+                    <p>Лиричная картина в нежных пастельных тонах. В центре - грациозная лошадь под цветущим деревом.</p>
+                    <span class="tech">Масло на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 17 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-17.jpg" alt="Ветер свободы">
+                    </div>
+                    <h3>«Ветер свободы»</h3>
+                    <p>Две лошади в золотистом поле на фоне неба с драматичными облаками. Передаёт мощь и грацию.</p>
+                    <span class="tech">Масло на холсте. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 18 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-18.jpg" alt="Танец на закате">
+                    </div>
+                    <h3>«Танец на закате»</h3>
+                    <p>Эмоциональная картина в теплых тонах. Мужчина и женщина с раскинутыми руками стоят у моря при заходе солнца.</p>
+                    <span class="tech">Масло на холсте.</span>
+                </div>
+
+                <!-- Карточка 19 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-19.jpg" alt="Тепло прикосновения">
+                    </div>
+                    <h3>«Тепло прикосновения»</h3>
+                    <p>Акварельная живопись, передающая нежность и близость в мягких тонах.</p>
+                    <span class="tech">Акварель на бумаге. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 20 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-20.jpg" alt="Тихий миг">
+                    </div>
+                    <h3>«Тихий миг»</h3>
+                    <p>Романтический портрет в теплых тонах. Эмоциональная живопись, передающая нежность и близость.</p>
+                    <span class="tech">Масло на холсте. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 21 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-21.jpg" alt="Танец ветра">
+                    </div>
+                    <h3>«Танец ветра»</h3>
+                    <p>Выразительный портрет девушки, написанный энергичными мазками. Волосы обрамляют нежные черты лица.</p>
+                    <span class="tech">Масло на холсте. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 22 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-22.jpg" alt="Цветущий рассвет">
+                    </div>
+                    <h3>«Цветущий рассвет»</h3>
+                    <p>Восточная сказка на холсте: цветущие вишни, горный водопад и древние пагоды. Тёплые пастельные тона.</p>
+                    <span class="tech">Акрил. 2026 г.</span>
+                </div>
+
+                <!-- Карточка 23 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-23.jpg" alt="Зимняя сказка">
+                    </div>
+                    <h3>«Зимняя сказка»</h3>
+                    <p>Трогательная живопись, передающая уют и тепло в морозный день. Ребёнок в меховой шубке нежно обнимает пушистого кота.</p>
+                    <span class="tech">Акрил на холсте. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 24 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-24.jpg" alt="Город и горы">
+                    </div>
+                    <h3>«Город и горы»</h3>
+                    <p>Величественный пейзаж, где современная архитектура встречается с вечной красотой заснеженных вершин.</p>
+                    <span class="tech">Акрил на холсте. 2022 г.</span>
+                </div>
+
+                <!-- Карточка 25 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-25.jpg" alt="Золотые птицы">
+                    </div>
+                    <h3>«Золотые птицы»</h3>
+                    <p>Волшебная живопись, где стая птиц, сияющая сусальным золотом, взмывает в небо над старинной башней.</p>
+                    <span class="tech">Смешанная техника. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 26 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-26.jpg" alt="Верный друг">
+                    </div>
+                    <h3>«Верный друг»</h3>
+                    <p>Трогательная живопись, передающая глубину связи между человеком и собакой. В золотистом поле под облачным небом.</p>
+                    <span class="tech">Акрил на холсте. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 27 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-27.jpg" alt="Дочь гор">
+                    </div>
+                    <h3>«Дочь гор»</h3>
+                    <p>Величественный портрет, где девушка в традиционном головном уборе смотрит на родные горы.</p>
+                    <span class="tech">Акрил на холсте. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 28 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-28.jpg" alt="Отражение души">
+                    </div>
+                    <h3>«Отражение души»</h3>
+                    <p>Абстрактный портрет, где лицо сливается с буйством красок природы. Внутренний мир окрашивает реальность.</p>
+                    <span class="tech">Смешанная техника. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 29 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-29.jpg" alt="Искусство соблазна">
+                    </div>
+                    <h3>«Искусство соблазна»</h3>
+                    <p>Элегантная живопись, где женская фигура изящно сливается с бокалом вина. Воспевание красоты момента.</p>
+                    <span class="tech">Акрил на холсте. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 30 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-30.jpg" alt="Золото степи">
+                    </div>
+                    <h3>«Золото степи»</h3>
+                    <p>Живописный пейзаж, где бескрайнее поле под облачным небом оживает благодаря сияющим акцентам потали.</p>
+                    <span class="tech">Акрил, поталь. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 31 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-31.jpg" alt="Гранат">
+                    </div>
+                    <h3>«Гранат»</h3>
+                    <p>Яркий натюрморт, где сочный гранат сияет на фоне динамичных мазков. Символ изобилия и полноты жизни.</p>
+                    <span class="tech">Масло на холсте. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 32 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-32.jpg" alt="Силуэт горы">
+                    </div>
+                    <h3>«Силуэт горы»</h3>
+                    <p>Рельефная живопись, где горный пик выступает из глубокой тьмы. Фактурные мазки создают ощущение мощи.</p>
+                    <span class="tech">Акрил. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 33 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-33.jpg" alt="Рождение волны">
+                    </div>
+                    <h3>«Рождение волны»</h3>
+                    <p>Динамичный морской пейзаж, где мощная волна оживает благодаря фактурным мазкам и сиянию золотой потали.</p>
+                    <span class="tech">Акрил, поталь. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 34 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-34.jpg" alt="Две вишни">
+                    </div>
+                    <h3>«Две вишни»</h3>
+                    <p>Сочные ягоды на тонкой веточке, покрытые каплями росы. Наполнена свежестью и летним настроением.</p>
+                    <span class="tech">Акрил. 2025 г.</span>
+                </div>
+
+                <!-- Карточка 35 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-35.jpg" alt="Хранитель саванны">
+                    </div>
+                    <h3>«Хранитель саванны»</h3>
+                    <p>Величественный лев, чья грива словно соткана из золотых лучей заката. Передаёт мощь и благородство.</p>
+                    <span class="tech">Акрил. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 36 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-36.jpg" alt="Белый цветок">
+                    </div>
+                    <h3>«Белый цветок»</h3>
+                    <p>Элегантное рельефное панно, где объёмный цветок раскрывается на светлом фоне.</p>
+                    <span class="tech">Текстурная паста, поталь. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 37 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-37.jpg" alt="Мелодия весны">
+                    </div>
+                    <h3>«Мелодия весны»</h3>
+                    <p>Круглое панно, где золотые ветви расцветают нежными цветами и наполняются пением птиц.</p>
+                    <span class="tech">Акрил, поталь, паста. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 38 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-38.jpg" alt="Звериный стиль">
+                    </div>
+                    <h3>«Звериный стиль»</h3>
+                    <p>Трёхчастная картина, где животные примеряют человеческие роли: жираф в цилиндре, енот-байкер и шимпанзе-астронавт.</p>
+                    <span class="tech">Акрил. 2024 г.</span>
+                </div>
+
+                <!-- Карточка 39 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-39.jpg" alt="Друзья">
+                    </div>
+                    <h3>«Друзья»</h3>
+                    <p>Трогательный портрет мальчика, обнимающего свою большую собаку. Передаёт тепло дружбы и доверие.</p>
+                    <span class="tech">Масло. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 40 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-40.jpg" alt="Вольный ветер">
+                    </div>
+                    <h3>«Вольный ветер»</h3>
+                    <p>Динамичная картина, где три вороных коня мчатся сквозь пространство. Смелые мазки и контраст.</p>
+                    <span class="tech">Акрил. 2025 г.</span>
+                </div>
+
+                <!-- Карточка 41 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-41.jpg" alt="Нежность пионов">
+                    </div>
+                    <h3>«Нежность пионов»</h3>
+                    <p>Роскошные пионы, распустившиеся во всей красе. Фактурные мазки и глубокие оттенки на тёмном фоне.</p>
+                    <span class="tech">Акрил. 2023 г.</span>
+                </div>
+
+                <!-- Карточка 42 -->
+                <div class="art-card">
+                    <div class="art-image-container">
+                        <img src="img/art-42.jpg" alt="Картина 42">
+                    </div>
+                    <h3>«Картина 42»</h3>
+                    <p>Описание для 42-й картины (добавьте текст).</p>
+                    <span class="tech">Техника. Год.</span>
+                </div>
+
             </div>
-        </div>
-        <!-- Кнопка "Купить" после галереи -->
-        <div class="container text-center mt-12 md:mt-16">
-            <a href="#final-cta" class="btn btn-primary text-base md:text-lg px-8 md:px-12 py-4 md:py-5 w-full md:w-auto">Купить картину</a>
+            <!-- Кнопка "Купить" после галереи -->
+            <div class="text-center mt-12 md:mt-16">
+                <a href="#final-cta" class="btn btn-primary text-base md:text-lg px-8 md:px-12 py-4 md:py-5 w-full md:w-auto">Купить картину</a>
+            </div>
         </div>
     </section>
 
@@ -471,7 +1023,92 @@
                     <a href="#" target="_blank" class="block hover:opacity-80 transition">
                         <img src="img/tg-logo.png" alt="Telegram" class="w-8 h-8 object-contain">
                     </a>
-                    <!-- WhatsApp сделан чуть больше -->
                     <a href="#" target="_blank" class="block hover:opacity-80 transition">
                         <img src="img/wa-logo.png" alt="WhatsApp" class="w-11 h-11 object-contain">
-                    </
+                    </a>
+                    <a href="#" target="_blank" class="block hover:opacity-80 transition">
+                        <img src="img/Inst-logo.png" alt="Instagram" class="w-8 h-8 object-contain">
+                    </a>
+                </div>
+                <a href="https://vk.ru/izazazii" target="_blank" class="btn btn-primary mt-4 w-full md:w-auto">Написать ВКонтакте</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- СКРИПТЫ -->
+    <script>
+        // --- Мобильное меню (Гамбургер) ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            if (mobileMenu.classList.contains('active')) {
+                menuIcon.classList.remove('ri-menu-3-line');
+                menuIcon.classList.add('ri-close-line');
+            } else {
+                menuIcon.classList.remove('ri-close-line');
+                menuIcon.classList.add('ri-menu-3-line');
+            }
+        });
+
+        // Закрываем меню при клике на ссылку
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.remove('ri-close-line');
+                menuIcon.classList.add('ri-menu-3-line');
+            });
+        });
+
+        // --- Переключатель годов для 12-й картины ---
+        function switchYear(showId, hideId, btn) {
+            // Скрываем обе картинки
+            document.getElementById('img-12').style.display = 'none';
+            document.getElementById('img-12-1').style.display = 'none';
+            
+            // Показываем нужную
+            document.getElementById(showId).style.display = 'block';
+            
+            // Меняем активный класс на кнопках
+            const buttons = btn.parentElement.querySelectorAll('.year-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // --- Карусель (Перетаскивание мышкой) ---
+        const slider = document.getElementById('galleryScroll');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Множитель скорости прокрутки
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+
+</body>
+</html>
