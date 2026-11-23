@@ -1,15 +1,3 @@
-Вот полный, финальный код со всеми правками. 
-
-**Что было сделано:**
-1. Везде (в шапке, в мобильном меню и в финальном блоке) **удален WhatsApp**.
-2. На его место добавлена **иконка MAX** (`max-logo.png`) со ссылкой, которую ты дал.
-3. Ссылка на **Telegram** заменена на `https://t.me/izazazii`.
-4. Надпись **«ЛИСТАЙ»** больше не двигается (убрал анимацию). Вместо иконочного шрифта теперь используется твоя картинка `arrow.png`.
-5. В мобильной версии всё выровнено (иконки в Hero-блоке и в меню аккуратно стоят в ряд).
-
-Скопируй **весь** этот код и полностью замени им свой `index.html`:
-
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -170,8 +158,12 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             position: absolute;
-            right: 0;
+            right: 24px;
             top: -40px;
+        }
+        
+        @media (max-width: 768px) {
+            .swipe-hint { font-size: 1rem; top: -35px; right: 24px; }
         }
 
         .year-switcher { display: flex; gap: 8px; margin-top: 8px; }
@@ -181,7 +173,7 @@
         }
         .year-btn.active { background: var(--accent); color: var(--white); }
 
-        /* --- ЛАЙТБОКС (МОДАЛЬНОЕ ОКНО) --- */
+        /* --- ЛАЙТБОКС --- */
         #lightbox {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -242,7 +234,6 @@
                 <a href="#" class="text-xl md:text-2xl tracking-widest font-semibold" style="font-family: var(--font-heading);">ИЛЬГИЗА<br>ТЕМЕРГАЛИНА</a>
             </div>
             
-            <!-- Навигация (Десктоп) -->
             <nav class="desktop-nav hidden md:flex items-center gap-8 text-sm uppercase tracking-wider text-[#6B635E]">
                 <a href="#about" class="hover:text-[#2D2723] transition">О художнике</a>
                 <a href="#services" class="hover:text-[#2D2723] transition">Услуги</a>
@@ -250,7 +241,6 @@
                 <a href="#reviews" class="hover:text-[#2D2723] transition">Отзывы</a>
             </nav>
 
-            <!-- Контакты и CTA (Десктоп) -->
             <div class="hidden md:flex items-center gap-6">
                 <div class="desktop-contacts flex flex-col items-end text-sm">
                     <a href="tel:+79999990000" class="font-semibold hover:text-[#8A745A] transition">+7 999 999 00 00</a>
@@ -258,7 +248,6 @@
                         <a href="https://vk.ru/izazazii" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
                             <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
                         </a>
-                        <!-- MAX -->
                         <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
                             <img src="img/max-logo.png" alt="MAX" class="w-full h-full object-contain absolute inset-0">
                         </a>
@@ -273,13 +262,11 @@
                 <a href="#final-cta" class="btn btn-primary">Связаться</a>
             </div>
 
-            <!-- Кнопка Гамбургер (Мобильная) -->
             <button id="menu-btn" class="md:hidden z-50 p-2 text-[#2D2723] focus:outline-none">
                 <i class="ri-menu-3-line text-3xl" id="menu-icon"></i>
             </button>
         </div>
 
-        <!-- Выпадающее мобильное меню -->
         <div id="mobile-menu" class="md:hidden bg-[#F8F6F0] border-t border-[#EFEBE1] absolute w-full left-0 shadow-lg">
             <div class="flex flex-col px-6 py-6 gap-6 text-lg text-[#6B635E]">
                 <a href="#about" class="hover:text-[#8A745A] transition mobile-link">О художнике</a>
@@ -295,7 +282,6 @@
                     <a href="https://vk.ru/izazazii" target="_blank" class="w-8 h-8 block relative">
                         <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
                     </a>
-                    <!-- MAX -->
                     <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-8 h-8 block relative">
                         <img src="img/max-logo.png" alt="MAX" class="w-full h-full object-contain absolute inset-0">
                     </a>
@@ -325,12 +311,10 @@
                 <a href="#gallery" class="btn btn-primary w-full md:w-auto">Смотреть работы</a>
                 <a href="#final-cta" class="btn btn-outline bg-white/10 border-white text-white hover:bg-white hover:text-black w-full md:w-auto">Заказать картину</a>
             </div>
-            <!-- Иконки на мобильных (в hero) -->
             <div class="flex gap-4 mt-8 md:hidden items-center justify-center">
                 <a href="https://vk.ru/izazazii" target="_blank" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
                     <img src="img/vk-logo.png" alt="VK" class="w-5 h-5 object-contain absolute inset-0 m-auto">
                 </a>
-                <!-- MAX -->
                 <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
                     <img src="img/max-logo.png" alt="MAX" class="w-5 h-5 object-contain absolute inset-0 m-auto">
                 </a>
@@ -464,12 +448,9 @@
                 <p class="text-base md:text-lg text-[#6B635E]">Нажмите на картину, чтобы рассмотреть её. Листайте, чтобы увидеть все работы.</p>
             </div>
 
-            <!-- Стрелка Листай (Картинка + без анимации) -->
-            <div class="swipe-hint hidden md:flex">
+            <!-- Стрелка Листай -->
+            <div class="swipe-hint">
                 ЛИСТАЙ <img src="img/arrow.png" alt="Стрелка" class="w-8 h-8 object-contain ml-2">
-            </div>
-            <div class="swipe-hint flex md:hidden !top-[-30px] !right-4 text-sm">
-                ЛИСТАЙ <img src="img/arrow.png" alt="Стрелка" class="w-6 h-6 object-contain ml-2">
             </div>
 
             <div class="gallery-scroll" id="galleryScroll">
@@ -512,8 +493,8 @@
                 </div>
                 <!-- 5 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-5.png')">
-                        <img src="img/art-5.png" alt="Шёпот звёзд">
+                    <div class="art-image-container" onclick="openLightbox('img/art-5.jpg')">
+                        <img src="img/art-5.jpg" alt="Шёпот звёзд">
                     </div>
                     <h3>«Шёпот звёзд»</h3>
                     <p>Завораживающий пейзаж, где заснеженные вершины растворяются в сиянии Млечного Пути.</p>
@@ -521,8 +502,8 @@
                 </div>
                 <!-- 6 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-6.png')">
-                        <img src="img/art-6.png" alt="Хранитель осени">
+                    <div class="art-image-container" onclick="openLightbox('img/art-6.jpg')">
+                        <img src="img/art-6.jpg" alt="Хранитель осени">
                     </div>
                     <h3>«Хранитель осени»</h3>
                     <p>Уютная живопись, где яркий зимородок с бирюзовым оперением отдыхает на фоне золотистой листвы.</p>
@@ -530,8 +511,8 @@
                 </div>
                 <!-- 7 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-7.png')">
-                        <img src="img/art-7.png" alt="Танец колибри">
+                    <div class="art-image-container" onclick="openLightbox('img/art-7.jpg')">
+                        <img src="img/art-7.jpg" alt="Танец колибри">
                     </div>
                     <h3>«Танец колибри»</h3>
                     <p>Динамичная живопись, запечатлевшая мгновение невесомости.</p>
@@ -539,8 +520,8 @@
                 </div>
                 <!-- 8 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-8.png')">
-                        <img src="img/art-8.png" alt="Единство">
+                    <div class="art-image-container" onclick="openLightbox('img/art-8.jpg')">
+                        <img src="img/art-8.jpg" alt="Единство">
                     </div>
                     <h3>«Единство»</h3>
                     <p>Мистическая живопись, где девушка с длинными волосами сливается с образом белого коня.</p>
@@ -548,8 +529,8 @@
                 </div>
                 <!-- 9 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-9.png')">
-                        <img src="img/art-9.png" alt="Поцелуй сакуры">
+                    <div class="art-image-container" onclick="openLightbox('img/art-9.jpg')">
+                        <img src="img/art-9.jpg" alt="Поцелуй сакуры">
                     </div>
                     <h3>«Поцелуй сакуры»</h3>
                     <p>Эмоциональная живопись, где нежность белого скакуна встречается с яркостью цветущей вишни.</p>
@@ -557,8 +538,8 @@
                 </div>
                 <!-- 10 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-10.png')">
-                        <img src="img/art-10.png" alt="Вальс ветра">
+                    <div class="art-image-container" onclick="openLightbox('img/art-10.jpg')">
+                        <img src="img/art-10.jpg" alt="Вальс ветра">
                     </div>
                     <h3>«Вальс ветра»</h3>
                     <p>Эмоциональная живопись, передающая грацию и силу. Пышные пряди гривы танцуют в воздухе.</p>
@@ -566,8 +547,8 @@
                 </div>
                 <!-- 11 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-11.png')">
-                        <img src="img/art-11.png" alt="Певец рассвета">
+                    <div class="art-image-container" onclick="openLightbox('img/art-11.jpg')">
+                        <img src="img/art-11.jpg" alt="Певец рассвета">
                     </div>
                     <h3>«Певец рассвета»</h3>
                     <p>Нежная картина, передающая трепетный момент. Маленькая птичка замерла на ветке.</p>
@@ -575,9 +556,9 @@
                 </div>
                 <!-- 12 (С переключателем годов) -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox(document.getElementById('img-12').style.display === 'block' ? 'img/art-12.png' : 'img/art-12.1.png')">
-                        <img src="img/art-12.png" alt="Фиалковая симфония 2022" id="img-12" style="display: block;">
-                        <img src="img/art-12.1.png" alt="Фиалковая симфония 2016" id="img-12-1" style="display: none;">
+                    <div class="art-image-container" onclick="openLightbox(document.getElementById('img-12').style.display === 'block' ? 'img/art-12.jpg' : 'img/art-12.1.jpg')">
+                        <img src="img/art-12.jpg" alt="Фиалковая симфония 2022" id="img-12" style="display: block;">
+                        <img src="img/art-12.1.jpg" alt="Фиалковая симфония 2016" id="img-12-1" style="display: none;">
                     </div>
                     <div class="year-switcher">
                         <button class="year-btn active" onclick="switchYear('img-12', 'img-12-1', this)">2022</button>
@@ -589,8 +570,8 @@
                 </div>
                 <!-- 13 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-13.png')">
-                        <img src="img/art-13.png" alt="Цветочный шепот">
+                    <div class="art-image-container" onclick="openLightbox('img/art-13.jpg')">
+                        <img src="img/art-13.jpg" alt="Цветочный шепот">
                     </div>
                     <h3>«Цветочный шепот»</h3>
                     <p>Эмоциональный портрет в нежных тонах. Девушка с серебристыми волосами окружена яркими бутонами.</p>
@@ -598,8 +579,8 @@
                 </div>
                 <!-- 14 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-14.png')">
-                        <img src="img/art-14.png" alt="Тень у воды">
+                    <div class="art-image-container" onclick="openLightbox('img/art-14.jpg')">
+                        <img src="img/art-14.jpg" alt="Тень у воды">
                     </div>
                     <h3>«Тень у воды»</h3>
                     <p>Эмоциональная живопись, передающая атмосферу спокойного вечера. Ствол дерева и его отражение на глади озера.</p>
@@ -607,8 +588,8 @@
                 </div>
                 <!-- 15 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-15.png')">
-                        <img src="img/art-15.png" alt="Лунный след">
+                    <div class="art-image-container" onclick="openLightbox('img/art-15.jpg')">
+                        <img src="img/art-15.jpg" alt="Лунный след">
                     </div>
                     <h3>«Лунный след»</h3>
                     <p>Монохромная живопись, наполненная магией зимнего леса. Вьюга и лунный свет.</p>
@@ -616,8 +597,8 @@
                 </div>
                 <!-- 16 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-16.png')">
-                        <img src="img/art-16.png" alt="Весенний вальс">
+                    <div class="art-image-container" onclick="openLightbox('img/art-16.jpg')">
+                        <img src="img/art-16.jpg" alt="Весенний вальс">
                     </div>
                     <h3>«Весенний вальс»</h3>
                     <p>Лиричная картина в нежных пастельных тонах. В центре - грациозная лошадь под цветущим деревом.</p>
@@ -625,8 +606,8 @@
                 </div>
                 <!-- 17 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-17.png')">
-                        <img src="img/art-17.png" alt="Ветер свободы">
+                    <div class="art-image-container" onclick="openLightbox('img/art-17.jpg')">
+                        <img src="img/art-17.jpg" alt="Ветер свободы">
                     </div>
                     <h3>«Ветер свободы»</h3>
                     <p>Две лошади в золотистом поле на фоне неба с драматичными облаками.</p>
@@ -634,8 +615,8 @@
                 </div>
                 <!-- 18 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-18.png')">
-                        <img src="img/art-18.png" alt="Танец на закате">
+                    <div class="art-image-container" onclick="openLightbox('img/art-18.jpg')">
+                        <img src="img/art-18.jpg" alt="Танец на закате">
                     </div>
                     <h3>«Танец на закате»</h3>
                     <p>Эмоциональная картина в теплых тонах. Мужчина и женщина с раскинутыми руками стоят у моря.</p>
@@ -643,8 +624,8 @@
                 </div>
                 <!-- 19 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-19.png')">
-                        <img src="img/art-19.png" alt="Тепло прикосновения">
+                    <div class="art-image-container" onclick="openLightbox('img/art-19.jpg')">
+                        <img src="img/art-19.jpg" alt="Тепло прикосновения">
                     </div>
                     <h3>«Тепло прикосновения»</h3>
                     <p>Акварельная живопись, передающая нежность и близость в мягких тонах.</p>
@@ -652,8 +633,8 @@
                 </div>
                 <!-- 20 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-20.png')">
-                        <img src="img/art-20.png" alt="Тихий миг">
+                    <div class="art-image-container" onclick="openLightbox('img/art-20.jpg')">
+                        <img src="img/art-20.jpg" alt="Тихий миг">
                     </div>
                     <h3>«Тихий миг»</h3>
                     <p>Романтический портрет в теплых тонах. Эмоциональная живопись, передающая нежность.</p>
@@ -661,8 +642,8 @@
                 </div>
                 <!-- 21 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-21.png')">
-                        <img src="img/art-21.png" alt="Танец ветра">
+                    <div class="art-image-container" onclick="openLightbox('img/art-21.jpg')">
+                        <img src="img/art-21.jpg" alt="Танец ветра">
                     </div>
                     <h3>«Танец ветра»</h3>
                     <p>Выразительный портрет девушки, написанный энергичными мазками.</p>
@@ -670,8 +651,8 @@
                 </div>
                 <!-- 22 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-22.png')">
-                        <img src="img/art-22.png" alt="Цветущий рассвет">
+                    <div class="art-image-container" onclick="openLightbox('img/art-22.jpg')">
+                        <img src="img/art-22.jpg" alt="Цветущий рассвет">
                     </div>
                     <h3>«Цветущий рассвет»</h3>
                     <p>Восточная сказка на холсте: цветущие вишни, горный водопад и древние пагоды.</p>
@@ -679,8 +660,8 @@
                 </div>
                 <!-- 23 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-23.png')">
-                        <img src="img/art-23.png" alt="Зимняя сказка">
+                    <div class="art-image-container" onclick="openLightbox('img/art-23.jpg')">
+                        <img src="img/art-23.jpg" alt="Зимняя сказка">
                     </div>
                     <h3>«Зимняя сказка»</h3>
                     <p>Трогательная живопись, передающая уют и тепло в морозный день.</p>
@@ -688,8 +669,8 @@
                 </div>
                 <!-- 24 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-24.png')">
-                        <img src="img/art-24.png" alt="Город и горы">
+                    <div class="art-image-container" onclick="openLightbox('img/art-24.jpg')">
+                        <img src="img/art-24.jpg" alt="Город и горы">
                     </div>
                     <h3>«Город и горы»</h3>
                     <p>Величественный пейзаж, где современная архитектура встречается с вечной красотой заснеженных вершин.</p>
@@ -697,8 +678,8 @@
                 </div>
                 <!-- 25 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-25.png')">
-                        <img src="img/art-25.png" alt="Золотые птицы">
+                    <div class="art-image-container" onclick="openLightbox('img/art-25.jpg')">
+                        <img src="img/art-25.jpg" alt="Золотые птицы">
                     </div>
                     <h3>«Золотые птицы»</h3>
                     <p>Волшебная живопись, где стая птиц, сияющая сусальным золотом, взмывает в небо.</p>
@@ -706,8 +687,8 @@
                 </div>
                 <!-- 26 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-26.png')">
-                        <img src="img/art-26.png" alt="Верный друг">
+                    <div class="art-image-container" onclick="openLightbox('img/art-26.jpg')">
+                        <img src="img/art-26.jpg" alt="Верный друг">
                     </div>
                     <h3>«Верный друг»</h3>
                     <p>Трогательная живопись, передающая глубину связи между человеком и собакой.</p>
@@ -715,8 +696,8 @@
                 </div>
                 <!-- 27 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-27.png')">
-                        <img src="img/art-27.png" alt="Дочь гор">
+                    <div class="art-image-container" onclick="openLightbox('img/art-27.jpg')">
+                        <img src="img/art-27.jpg" alt="Дочь гор">
                     </div>
                     <h3>«Дочь гор»</h3>
                     <p>Величественный портрет, где девушка в традиционном головном уборе смотрит на родные горы.</p>
@@ -724,8 +705,8 @@
                 </div>
                 <!-- 28 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-28.png')">
-                        <img src="img/art-28.png" alt="Отражение души">
+                    <div class="art-image-container" onclick="openLightbox('img/art-28.jpg')">
+                        <img src="img/art-28.jpg" alt="Отражение души">
                     </div>
                     <h3>«Отражение души»</h3>
                     <p>Абстрактный портрет, где лицо сливается с буйством красок природы.</p>
@@ -733,8 +714,8 @@
                 </div>
                 <!-- 29 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-29.png')">
-                        <img src="img/art-29.png" alt="Искусство соблазна">
+                    <div class="art-image-container" onclick="openLightbox('img/art-29.jpg')">
+                        <img src="img/art-29.jpg" alt="Искусство соблазна">
                     </div>
                     <h3>«Искусство соблазна»</h3>
                     <p>Элегантная живопись, где женская фигура изящно сливается с бокалом вина.</p>
@@ -742,8 +723,8 @@
                 </div>
                 <!-- 30 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-30.png')">
-                        <img src="img/art-30.png" alt="Золото степи">
+                    <div class="art-image-container" onclick="openLightbox('img/art-30.jpg')">
+                        <img src="img/art-30.jpg" alt="Золото степи">
                     </div>
                     <h3>«Золото степи»</h3>
                     <p>Живописный пейзаж, где бескрайнее поле под облачным небом оживает благодаря сияющим акцентам потали.</p>
@@ -751,8 +732,8 @@
                 </div>
                 <!-- 31 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-31.png')">
-                        <img src="img/art-31.png" alt="Гранат">
+                    <div class="art-image-container" onclick="openLightbox('img/art-31.jpg')">
+                        <img src="img/art-31.jpg" alt="Гранат">
                     </div>
                     <h3>«Гранат»</h3>
                     <p>Яркий натюрморт, где сочный гранат сияет на фоне динамичных мазков.</p>
@@ -760,8 +741,8 @@
                 </div>
                 <!-- 32 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-32.png')">
-                        <img src="img/art-32.png" alt="Силуэт горы">
+                    <div class="art-image-container" onclick="openLightbox('img/art-32.jpg')">
+                        <img src="img/art-32.jpg" alt="Силуэт горы">
                     </div>
                     <h3>«Силуэт горы»</h3>
                     <p>Рельефная живопись, где горный пик выступает из глубокой тьмы.</p>
@@ -769,8 +750,8 @@
                 </div>
                 <!-- 33 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-33.png')">
-                        <img src="img/art-33.png" alt="Рождение волны">
+                    <div class="art-image-container" onclick="openLightbox('img/art-33.jpg')">
+                        <img src="img/art-33.jpg" alt="Рождение волны">
                     </div>
                     <h3>«Рождение волны»</h3>
                     <p>Динамичный морской пейзаж, где мощная волна оживает благодаря фактурным мазкам и сиянию золотой потали.</p>
@@ -778,8 +759,8 @@
                 </div>
                 <!-- 34 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-34.png')">
-                        <img src="img/art-34.png" alt="Две вишни">
+                    <div class="art-image-container" onclick="openLightbox('img/art-34.jpg')">
+                        <img src="img/art-34.jpg" alt="Две вишни">
                     </div>
                     <h3>«Две вишни»</h3>
                     <p>Сочные ягоды на тонкой веточке, покрытые каплями росы. Наполнена свежестью.</p>
@@ -787,8 +768,8 @@
                 </div>
                 <!-- 35 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-35.png')">
-                        <img src="img/art-35.png" alt="Хранитель саванны">
+                    <div class="art-image-container" onclick="openLightbox('img/art-35.jpg')">
+                        <img src="img/art-35.jpg" alt="Хранитель саванны">
                     </div>
                     <h3>«Хранитель саванны»</h3>
                     <p>Величественный лев, чья грива словно соткана из золотых лучей заката.</p>
@@ -796,8 +777,8 @@
                 </div>
                 <!-- 36 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-36.png')">
-                        <img src="img/art-36.png" alt="Белый цветок">
+                    <div class="art-image-container" onclick="openLightbox('img/art-36.jpg')">
+                        <img src="img/art-36.jpg" alt="Белый цветок">
                     </div>
                     <h3>«Белый цветок»</h3>
                     <p>Элегантное рельефное панно, где объёмный цветок раскрывается на светлом фоне.</p>
@@ -805,8 +786,8 @@
                 </div>
                 <!-- 37 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-37.png')">
-                        <img src="img/art-37.png" alt="Мелодия весны">
+                    <div class="art-image-container" onclick="openLightbox('img/art-37.jpg')">
+                        <img src="img/art-37.jpg" alt="Мелодия весны">
                     </div>
                     <h3>«Мелодия весны»</h3>
                     <p>Круглое панно, где золотые ветви расцветают нежными цветами.</p>
@@ -814,8 +795,8 @@
                 </div>
                 <!-- 38 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-38.png')">
-                        <img src="img/art-38.png" alt="Звериный стиль">
+                    <div class="art-image-container" onclick="openLightbox('img/art-38.jpg')">
+                        <img src="img/art-38.jpg" alt="Звериный стиль">
                     </div>
                     <h3>«Звериный стиль»</h3>
                     <p>Трёхчастная картина, где животные примеряют человеческие роли.</p>
@@ -823,8 +804,8 @@
                 </div>
                 <!-- 39 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-39.png')">
-                        <img src="img/art-39.png" alt="Друзья">
+                    <div class="art-image-container" onclick="openLightbox('img/art-39.jpg')">
+                        <img src="img/art-39.jpg" alt="Друзья">
                     </div>
                     <h3>«Друзья»</h3>
                     <p>Трогательный портрет мальчика, обнимающего свою большую собаку.</p>
@@ -832,8 +813,8 @@
                 </div>
                 <!-- 40 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-40.png')">
-                        <img src="img/art-40.png" alt="Вольный ветер">
+                    <div class="art-image-container" onclick="openLightbox('img/art-40.jpg')">
+                        <img src="img/art-40.jpg" alt="Вольный ветер">
                     </div>
                     <h3>«Вольный ветер»</h3>
                     <p>Динамичная картина, где три вороных коня мчатся сквозь пространство.</p>
@@ -841,8 +822,8 @@
                 </div>
                 <!-- 41 -->
                 <div class="art-card">
-                    <div class="art-image-container" onclick="openLightbox('img/art-41.png')">
-                        <img src="img/art-41.png" alt="Нежность пионов">
+                    <div class="art-image-container" onclick="openLightbox('img/art-41.jpg')">
+                        <img src="img/art-41.jpg" alt="Нежность пионов">
                     </div>
                     <h3>«Нежность пионов»</h3>
                     <p>Роскошные пионы, распустившиеся во всей красе. Фактурные мазки на тёмном фоне.</p>
@@ -1030,4 +1011,3 @@
 
 </body>
 </html>
-```
