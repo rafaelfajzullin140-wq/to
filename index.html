@@ -146,7 +146,7 @@
         .art-card p { font-size: 14px; color: var(--text-muted); }
         .art-card .tech { font-weight: 600; margin-top: 8px; display: block; color: var(--text-main); }
 
-        /* Стрелка "Листай" */
+        /* Стрелка "Листай" (увеличена) */
         .swipe-hint {
             display: flex;
             align-items: center;
@@ -159,7 +159,7 @@
             text-transform: uppercase;
             position: absolute;
             right: 24px;
-            top: -40px;
+            top: -45px; /* Сдвинули чуть выше из-за размера стрелки */
         }
         
         @media (max-width: 768px) {
@@ -244,17 +244,18 @@
             <div class="hidden md:flex items-center gap-6">
                 <div class="desktop-contacts flex flex-col items-end text-sm">
                     <a href="tel:+79999990000" class="font-semibold hover:text-[#8A745A] transition">+7 999 999 00 00</a>
-                    <div class="flex gap-3 mt-1 items-center">
-                        <a href="https://vk.ru/izazazii" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                    <!-- Иконки в шапке увеличены в 1.5 раза (w-9, h-9, для MAX w-12) -->
+                    <div class="flex gap-4 mt-1 items-center">
+                        <a href="https://vk.ru/izazazii" target="_blank" class="w-9 h-9 block hover:opacity-70 transition relative">
                             <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
                         </a>
-                        <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                        <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-12 h-12 block hover:opacity-70 transition relative">
                             <img src="img/max-logo.png" alt="MAX" class="w-full h-full object-contain absolute inset-0">
                         </a>
-                        <a href="https://t.me/izazazii" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                        <a href="https://t.me/izazazii" target="_blank" class="w-9 h-9 block hover:opacity-70 transition relative">
                             <img src="img/tg-logo.png" alt="Telegram" class="w-full h-full object-contain absolute inset-0">
                         </a>
-                        <a href="#" target="_blank" class="w-6 h-6 block hover:opacity-70 transition relative">
+                        <a href="#" target="_blank" class="w-9 h-9 block hover:opacity-70 transition relative">
                             <img src="img/Inst-logo.png" alt="Instagram" class="w-full h-full object-contain absolute inset-0">
                         </a>
                     </div>
@@ -278,17 +279,18 @@
                 
                 <a href="tel:+79999990000" class="font-semibold text-[#2D2723] text-xl">+7 999 999 00 00</a>
                 
+                <!-- Иконки в мобильном меню увеличены в 2 раза -->
                 <div class="flex gap-4 mt-2 items-center">
-                    <a href="https://vk.ru/izazazii" target="_blank" class="w-8 h-8 block relative">
+                    <a href="https://vk.ru/izazazii" target="_blank" class="w-12 h-12 block relative">
                         <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
                     </a>
-                    <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-8 h-8 block relative">
+                    <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-16 h-16 block relative">
                         <img src="img/max-logo.png" alt="MAX" class="w-full h-full object-contain absolute inset-0">
                     </a>
-                    <a href="https://t.me/izazazii" target="_blank" class="w-8 h-8 block relative">
+                    <a href="https://t.me/izazazii" target="_blank" class="w-12 h-12 block relative">
                         <img src="img/tg-logo.png" alt="Telegram" class="w-full h-full object-contain absolute inset-0">
                     </a>
-                    <a href="#" target="_blank" class="w-8 h-8 block relative">
+                    <a href="#" target="_blank" class="w-12 h-12 block relative">
                         <img src="img/Inst-logo.png" alt="Instagram" class="w-full h-full object-contain absolute inset-0">
                     </a>
                 </div>
@@ -311,18 +313,19 @@
                 <a href="#gallery" class="btn btn-primary w-full md:w-auto">Смотреть работы</a>
                 <a href="#final-cta" class="btn btn-outline bg-white/10 border-white text-white hover:bg-white hover:text-black w-full md:w-auto">Заказать картину</a>
             </div>
+            <!-- Иконки на мобильных (в hero) увеличены в 2 раза -->
             <div class="flex gap-4 mt-8 md:hidden items-center justify-center">
-                <a href="https://vk.ru/izazazii" target="_blank" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
-                    <img src="img/vk-logo.png" alt="VK" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                <a href="https://vk.ru/izazazii" target="_blank" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/vk-logo.png" alt="VK" class="w-8 h-8 object-contain absolute inset-0 m-auto">
                 </a>
-                <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
-                    <img src="img/max-logo.png" alt="MAX" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/max-logo.png" alt="MAX" class="w-10 h-10 object-contain absolute inset-0 m-auto">
                 </a>
-                <a href="https://t.me/izazazii" target="_blank" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
-                    <img src="img/tg-logo.png" alt="TG" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                <a href="https://t.me/izazazii" target="_blank" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/tg-logo.png" alt="TG" class="w-8 h-8 object-contain absolute inset-0 m-auto">
                 </a>
-                <a href="#" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center relative">
-                    <img src="img/Inst-logo.png" alt="Instagram" class="w-5 h-5 object-contain absolute inset-0 m-auto">
+                <a href="#" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center relative">
+                    <img src="img/Inst-logo.png" alt="Instagram" class="w-8 h-8 object-contain absolute inset-0 m-auto">
                 </a>
             </div>
         </div>
@@ -448,9 +451,9 @@
                 <p class="text-base md:text-lg text-[#6B635E]">Нажмите на картину, чтобы рассмотреть её. Листайте, чтобы увидеть все работы.</p>
             </div>
 
-            <!-- Стрелка Листай -->
+            <!-- Стрелка Листай (Картинка) -->
             <div class="swipe-hint">
-                ЛИСТАЙ <img src="img/arrow.png" alt="Стрелка" class="w-8 h-8 object-contain ml-2">
+                ЛИСТАЙ <img src="img/arrow.png" alt="Стрелка" class="w-12 h-12 object-contain ml-2">
             </div>
 
             <div class="gallery-scroll" id="galleryScroll">
@@ -909,17 +912,16 @@
                 
                 <div class="flex gap-4 items-center justify-center w-full md:justify-end">
                     <a href="https://vk.ru/izazazii" target="_blank" class="block hover:opacity-80 transition">
-                        <img src="img/vk-logo.png" alt="VK" class="w-8 h-8 object-contain">
+                        <img src="img/vk-logo.png" alt="VK" class="w-10 h-10 object-contain">
                     </a>
-                    <!-- MAX -->
                     <a href="https://vk.ru/away.php?to=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOKlUbAVLpGV5bgScXE4WiC9Puth-cWhh6_2mSH7SKuy1szJseQ&utf=1" target="_blank" class="block hover:opacity-80 transition">
-                        <img src="img/max-logo.png" alt="MAX" class="w-8 h-8 object-contain">
+                        <img src="img/max-logo.png" alt="MAX" class="w-10 h-10 object-contain">
                     </a>
                     <a href="https://t.me/izazazii" target="_blank" class="block hover:opacity-80 transition">
-                        <img src="img/tg-logo.png" alt="Telegram" class="w-8 h-8 object-contain">
+                        <img src="img/tg-logo.png" alt="Telegram" class="w-10 h-10 object-contain">
                     </a>
                     <a href="#" target="_blank" class="block hover:opacity-80 transition">
-                        <img src="img/Inst-logo.png" alt="Instagram" class="w-8 h-8 object-contain">
+                        <img src="img/Inst-logo.png" alt="Instagram" class="w-10 h-10 object-contain">
                     </a>
                 </div>
                 <a href="https://vk.ru/izazazii" target="_blank" class="btn btn-primary mt-4 w-full md:w-auto">Написать ВКонтакте</a>
