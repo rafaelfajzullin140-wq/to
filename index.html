@@ -146,7 +146,7 @@
         .art-card p { font-size: 14px; color: var(--text-muted); }
         .art-card .tech { font-weight: 600; margin-top: 8px; display: block; color: var(--text-main); }
 
-        /* Стрелка "Листай" (увеличена) */
+        /* Стрелка "Листай" */
         .swipe-hint {
             display: flex;
             align-items: center;
@@ -159,7 +159,7 @@
             text-transform: uppercase;
             position: absolute;
             right: 24px;
-            top: -45px; /* Сдвинули чуть выше из-за размера стрелки */
+            top: -45px;
         }
         
         @media (max-width: 768px) {
@@ -244,7 +244,6 @@
             <div class="hidden md:flex items-center gap-6">
                 <div class="desktop-contacts flex flex-col items-end text-sm">
                     <a href="tel:+79999990000" class="font-semibold hover:text-[#8A745A] transition">+7 999 999 00 00</a>
-                    <!-- Иконки в шапке увеличены в 1.5 раза (w-9, h-9, для MAX w-12) -->
                     <div class="flex gap-4 mt-1 items-center">
                         <a href="https://vk.ru/izazazii" target="_blank" class="w-9 h-9 block hover:opacity-70 transition relative">
                             <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
@@ -279,7 +278,6 @@
                 
                 <a href="tel:+79999990000" class="font-semibold text-[#2D2723] text-xl">+7 999 999 00 00</a>
                 
-                <!-- Иконки в мобильном меню увеличены в 2 раза -->
                 <div class="flex gap-4 mt-2 items-center">
                     <a href="https://vk.ru/izazazii" target="_blank" class="w-12 h-12 block relative">
                         <img src="img/vk-logo.png" alt="VK" class="w-full h-full object-contain absolute inset-0">
@@ -313,7 +311,6 @@
                 <a href="#gallery" class="btn btn-primary w-full md:w-auto">Смотреть работы</a>
                 <a href="#final-cta" class="btn btn-outline bg-white/10 border-white text-white hover:bg-white hover:text-black w-full md:w-auto">Заказать картину</a>
             </div>
-            <!-- Иконки на мобильных (в hero) увеличены в 2 раза -->
             <div class="flex gap-4 mt-8 md:hidden items-center justify-center">
                 <a href="https://vk.ru/izazazii" target="_blank" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center relative">
                     <img src="img/vk-logo.png" alt="VK" class="w-8 h-8 object-contain absolute inset-0 m-auto">
@@ -451,7 +448,6 @@
                 <p class="text-base md:text-lg text-[#6B635E]">Нажмите на картину, чтобы рассмотреть её. Листайте, чтобы увидеть все работы.</p>
             </div>
 
-            <!-- Стрелка Листай (Картинка) -->
             <div class="swipe-hint">
                 ЛИСТАЙ <img src="img/arrow.png" alt="Стрелка" class="w-12 h-12 object-contain ml-2">
             </div>
@@ -823,7 +819,7 @@
                     <p>Динамичная картина, где три вороных коня мчатся сквозь пространство.</p>
                     <span class="tech">Акрил. 2025 г.</span>
                 </div>
-                <!-- 41 -->
+                <!-- 41 (ИСПРАВЛЕНО НА PNG) -->
                 <div class="art-card">
                     <div class="art-image-container" onclick="openLightbox('img/art-41.png')">
                         <img src="img/art-41.png" alt="Нежность пионов">
